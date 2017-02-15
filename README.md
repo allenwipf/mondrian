@@ -3,6 +3,8 @@ This program is a "Mondrian."
 Made with Ruby, Sinetra, HTML, CSS and Javascript
 SETUP
 
+SETUP
+
 You'll need Ruby for this, so install Ruby using Homebrew or some other tool that works for your system. You'll also need the Ruby framework "Sinetra".
 
 HOW TO USE
