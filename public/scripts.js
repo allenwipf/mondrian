@@ -25,8 +25,9 @@ function changeColor(){
     } else if (event.target.id == "blue"){
         currentColor = "#0000cc"
 
-    } else if (event.target.id == "white")
-        currentColor = "white"
+    } else if (event.target.id == "white"){
+        currentColor = "white";
+    }
 }
 
 // changes the background of the box clicked to whatever the value of 
@@ -39,32 +40,32 @@ function changeBox(){
 // into an array, then turn that into a string.
 function getColors(e){
   
-    var boxArray = []
-    var boxes = document.getElementsByClassName("row") 
+    var boxArray = [];
+    var boxes = document.getElementsByClassName("row");
     for (x=0; x <= boxes.length-1; x++){
         if (boxes[x].style.background == ''){
 
-            boxes[x].style.background = "rgb(255,255,255)"
+            boxes[x].style.background = "rgb(255,255,255)";
         }
-       boxArray.push(boxes[x].style.background)
-       var boxString = boxArray.join()
+       boxArray.push(boxes[x].style.background);
+       var boxString = boxArray.join();
     }   
-    return boxString
+    return boxString;
 }
 
 // sends a post request to the server with the string of game box colors
 // then alerts the artist that game was saved
 function saveImage(e){
 
-    e.preventDefault()
-    sendData = getColors(e)
+    e.preventDefault();
+    sendData = getColors(e);
     var ourRequest = new XMLHttpRequest();
-    var params = "game=" + sendData
+    var params = "game=" + sendData;
 
     ourRequest.open('POST', '/', true);
 
     ourRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     ourRequest.send(params);
 
-    alert("Game Saved!")
+    alert("Game Saved!");
 }
