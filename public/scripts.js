@@ -11,8 +11,9 @@ window.addEventListener("load", function(){
 
 });
 
- var currentColor = 'white'
-
+// Sets the painter (currentColor) to white then depending on what box
+// is clicked in the color box, will change currentColor to that color
+var currentColor = 'white'
 function changeColor(){
  
     if (event.target.id == "red"){
@@ -28,99 +29,42 @@ function changeColor(){
         currentColor = "white"
 }
 
+// changes the background of the box clicked to whatever the value of 
+// currentColor is at that moment
 function changeBox(){
-  
     event.target.style.background = currentColor
 }
 
-
+// when "save" is clicked, will push the background value of each box
+// into an array, then turn that into a string.
 function getColors(e){
   
     var boxArray = []
     var boxes = document.getElementsByClassName("row") 
     for (x=0; x <= boxes.length-1; x++){
-
         if (boxes[x].style.background == ''){
 
             boxes[x].style.background = "rgb(255,255,255)"
         }
-
        boxArray.push(boxes[x].style.background)
        var boxString = boxArray.join()
     }   
     return boxString
 }
 
-
-
-
+// sends a post request to the server with the string of game box colors
+// then alerts the artist that game was saved
 function saveImage(e){
 
     e.preventDefault()
-
     sendData = getColors(e)
-
-
     var ourRequest = new XMLHttpRequest();
     var params = "game=" + sendData
 
     ourRequest.open('POST', '/', true);
 
     ourRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
     ourRequest.send(params);
 
     alert("Game Saved!")
 }
-
-
-// function profileView(e){
-  
-//     var findTime = ((e.timeStamp-pageLoad)/1000).toFixed(1);
-//     document.getElementById("find-time").innerHTML = ("You found him in " + findTime + " seconds!");
-
-//     document.getElementById('myModal').style.display = "block";
-
-// }
-
-
-// function closeModal(e){
-
-//     if (e.target == this) {
-//         document.getElementById('myModal').style.display = "none";
-//     } else if (e.target == this.getElementsByClassName("close")[0]) {
-//         document.getElementById('myModal').style.display = "none";
-//     }
-
-// }
-
-// function highScores(e){
-
-//     var getRequest = new XMLHttpRequest();
-//     getRequest.open('GET', 'http://localhost:4567/data');
-
-//     getRequest.onload = function() {
-     
-//     var ourData = getRequest.responseText;
-  
-//     // myData = getRequest.responseText
-
-//     alert(ourData)
-//     // var ourData = JSON.parse(getRequest.responseText);
-
-//     };
-
-    
-//     getRequest.send()
-
-//     e.preventDefault;
-// }
-
-
-
-
-
-
-
-
-
