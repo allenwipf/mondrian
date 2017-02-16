@@ -1,13 +1,12 @@
 window.addEventListener("load", function(){
 
-    var colorList = document.getElementById("color_palette");
-    colorList.addEventListener("click", changeColor);
+    document.getElementById("color_palette").addEventListener("click", changeColor);
 
-    var boxes = document.getElementById("painting");
-    boxes.addEventListener("click", changeBox);
+    document.getElementById("painting").addEventListener("click", changeBox);
 
-    var save = document.getElementById("save_button");
-    save.addEventListener("click", saveImage);
+    document.getElementById("save_button").addEventListener("click", saveImage);
+
+    document.getElementById("past_button").addEventListener("click", getPastGames);
 
 });
 
@@ -26,7 +25,7 @@ function changeColor(){
         currentColor = "#0000cc"
 
     } else if (event.target.id == "white"){
-        currentColor = "white";
+        currentColor = "#ffffff";
     }
 }
 
@@ -45,7 +44,7 @@ function getColors(e){
     for (x=0; x <= boxes.length-1; x++){
         if (boxes[x].style.background == ''){
 
-            boxes[x].style.background = "rgb(255,255,255)";
+            boxes[x].style.background = "#ffffff";
         }
        boxArray.push(boxes[x].style.background);
        var boxString = boxArray.join();
@@ -69,3 +68,70 @@ function saveImage(e){
 
     alert("Game Saved!");
 }
+
+
+function getPastGames(e) {
+
+    var getRequest = new XMLHttpRequest();
+    getRequest.open('GET', '/data');
+
+    getRequest.onload = function() {
+        var ourData = getRequest.responseText; 
+
+        paintPastCanvas(ourData)
+    };
+    getRequest.send();
+    e.preventDefault();
+}
+
+function paintPastCanvas(ourData){
+    var x = 1
+    var y = 1
+  
+
+    // ourData = ourData.{split}(",")
+    ourData = ourData.slice(1, -1);
+debugger
+    // ourData.forEach(function(color) {
+
+    //     if (color == '(204, 0, 0)'){
+    //         document.getElementById("row_" + x + "_box_" + y + "").style.background = "#cc0000" 
+               
+    //     } else if (color == '(255, 236, 0)'){
+    //         document.getElementById("row_" + x + "_box_" + y + "").style.background = "#ffec00"
+
+    //     } else if ( color == '(0, 0, 204)'){
+    //         document.getElementById("row_" + x + "_box_" + y + "").style.background = "#0000cc"
+
+    //     } else {
+    //         document.getElementById("row_" + x + "_box_" + y + "").style.background = "white"
+    //     }  
+
+
+    // y++
+    // if (y == 5){
+
+    //     x++
+    //     y = 1
+    // }
+
+// } );
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

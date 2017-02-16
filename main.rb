@@ -17,3 +17,12 @@ post ("/"){
 	save_game(saveGameData)
 
 }
+
+get ("/data"){
+
+	date = "1"
+	getPastCanvas(date)
+
+	return session[:requestedDay]
+
+}
