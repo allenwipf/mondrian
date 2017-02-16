@@ -91,31 +91,32 @@ function paintPastCanvas(ourData){
 
     // ourData = ourData.{split}(",")
     ourData = ourData.slice(1, -1);
-debugger
-    // ourData.forEach(function(color) {
+    ourData = ourData.split(/\W,{1}\W/)
 
-    //     if (color == '(204, 0, 0)'){
-    //         document.getElementById("row_" + x + "_box_" + y + "").style.background = "#cc0000" 
+    ourData.forEach(function(color) {
+
+        if (color == '204, 0, 0'){
+            document.getElementById("row_" + x + "_box_" + y + "").style.background = "#cc0000" 
                
-    //     } else if (color == '(255, 236, 0)'){
-    //         document.getElementById("row_" + x + "_box_" + y + "").style.background = "#ffec00"
+        } else if (color == '255, 236, 0'){
+            document.getElementById("row_" + x + "_box_" + y + "").style.background = "#ffec00"
 
-    //     } else if ( color == '(0, 0, 204)'){
-    //         document.getElementById("row_" + x + "_box_" + y + "").style.background = "#0000cc"
+        } else if ( color == '0, 0, 204'){
+            document.getElementById("row_" + x + "_box_" + y + "").style.background = "#0000cc"
 
-    //     } else {
-    //         document.getElementById("row_" + x + "_box_" + y + "").style.background = "white"
-    //     }  
+        } else {
+            document.getElementById("row_" + x + "_box_" + y + "").style.background = "white"
+        }  
 
 
-    // y++
-    // if (y == 5){
+        y++
+        if (y == 5){
 
-    //     x++
-    //     y = 1
-    // }
+            x++
+            y = 1
+        }
 
-// } );
+    } );
 
 }
 
