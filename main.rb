@@ -15,7 +15,7 @@ get ("/"){
 post ("/"){
 
 	saveGameData = (params["game"])
-	save_game(saveGameData)
+	saveCanvas(saveGameData)
 
 }
 

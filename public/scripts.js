@@ -1,15 +1,10 @@
 window.addEventListener("load", function(){
 
     document.getElementById("color_palette").addEventListener("click", changeColor);
-
     document.getElementById("painting").addEventListener("click", changeBox);
-
-    document.getElementById("save_button").addEventListener("click", saveImage);
-
+    document.getElementById("save_button").addEventListener("click", saveCanvas);
     document.getElementById("past_button").addEventListener("click", openPastSaved);
-
     document.getElementById("clear_button").addEventListener("click", clearCanvas);
-
     document.getElementById("myModal").addEventListener("click", closeModal);
 
 });
@@ -58,7 +53,7 @@ function getColors(e){
 
 // sends a post request to the server with the string of game box colors
 // then alerts the artist that game was saved
-function saveImage(e){
+function saveCanvas(e){
 
     e.preventDefault();
     sendData = getColors(e);
@@ -73,8 +68,9 @@ function saveImage(e){
     alert("Game Saved!");
 }
 
-
-function getPastGames(canvasID) {
+// when a specific saved canvas is clicked inside the modal window, the unique id of that canvas
+// is passed as a param to the server to retrieve that canvas
+function getPastCanvas(canvasID) {
 
     var getRequest = new XMLHttpRequest();
     var params = "gameId=" + canvasID
@@ -86,13 +82,14 @@ function getPastGames(canvasID) {
         paintPastCanvas(ourData)
     };
     getRequest.send(params);
-    // e.preventDefault();
 }
 
+// when a specific data set for a saved canvas is retrieved, this function loops though each color
+// and applies that color to the appropriate block
 function paintPastCanvas(ourData){
     var x = 1
     var y = 1
-    // ourData = ourData.{split}(",")
+
     ourData = ourData.slice(1, -1);
     ourData = ourData.split(/\W,{1}\W/)
 
@@ -107,26 +104,19 @@ function paintPastCanvas(ourData){
         } else {
             document.getElementById("row_" + x + "_box_" + y + "").style.background = "#ffffff"
         }  
-
         y++
         if (y == 5){
-
             x++
             y = 1
         }
-
-    } );
-
+    });
     document.getElementById('myModal').style.display = "none"
-
 }
 
-
+// turns the background color of each block into an empty string to clear all the colors
 function clearCanvas(){
     var x = 1
     var y = 1
-
-
     var howmany = document.getElementsByClassName("row").length
 
     for (boxes = 1; boxes <= howmany; boxes++){
@@ -140,6 +130,9 @@ function clearCanvas(){
     }
 }
 
+// each time a canvas is saved, the Epoch time in seconds is saved as it's unique id.
+// this function gets all those titles via a get request and places them in a modal
+// when user clicks the "Past" button
 function openPastSaved(e){
 
     var getRequest = new XMLHttpRequest();
@@ -153,12 +146,9 @@ function openPastSaved(e){
     };
     getRequest.send();
     e.preventDefault();
-
-    // addListenerToModal()
 }
 
 // Closes the Modal box if the "X" our anything outside the Modal is clicked on.
-// Will then refresh the page so timer resets.
 function closeModal(e){
 
     if (e.target == this) {
