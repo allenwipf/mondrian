@@ -59,10 +59,10 @@ def beautifyTitles(data)
 	titleString = ''
 	data.each do |id| 
 
-		allen = Time.at(id.to_i)
-		allen = allen.strftime('%a, %b %d %Y %H:%M')
+		formattedTime = Time.at(id.to_i)
+		formattedTime = formattedTime.strftime('%a, %b %d %Y %H:%M')
 	
-		titleString += "<button style='margin: 5px' onclick='getPastCanvas(#{id});'>#{allen}</button>"
+		titleString += "<button style='margin: 5px' onclick='getPastCanvas(#{id});'>#{formattedTime}</button>"
  	end
  	return titleString
 end

@@ -114,7 +114,7 @@ function paintPastCanvas(ourData){
 }
 
 // turns the background color of each block into an empty string to clear all the colors
-function clearCanvas(){
+function clearCanvas(e){
     var x = 1
     var y = 1
     var howmany = document.getElementsByClassName("row").length
@@ -128,6 +128,7 @@ function clearCanvas(){
             y = 1
         }
     }
+    e.preventDefault()
 }
 
 // each time a canvas is saved, the Epoch time in seconds is saved as it's unique id.
@@ -158,18 +159,3 @@ function closeModal(e){
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
