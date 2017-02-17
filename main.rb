@@ -3,6 +3,7 @@ require_relative './functions.rb'
 require "pry"
 require "csv"
 require 'json'
+
 enable :sessions
 
 
@@ -20,9 +21,14 @@ post ("/"){
 
 get ("/data"){
 
-	date = "1"
+	date = (params["gameId"])
 	getPastCanvas(date)
 
 	return session[:requestedDay]
+}
 
+get ("/titles"){
+
+	getCanvasTitles
+	return session[:canvasTitles]
 }

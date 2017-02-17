@@ -2,8 +2,7 @@
 def save_game(game_colors)
 	info = File.open("/Users/Wipf/Code/projects/mondrian/views/data.erb", "a") # a to append
 	info.print "\n"
-	# info.print "#{Time.now.to_f},"
-	info.print "1,"
+	info.print "#{Time.now.to_i},"
 	info.print game_colors
 
 	info.close
@@ -28,20 +27,36 @@ def getPastCanvas(date)
 			end 
 		end
 	end
+end
+
+def getCanvasTitles()
+	titles = []
+	File.open("/Users/Wipf/Code/projects/mondrian/views/data.erb", "r") do |data|
+
+		data.each_line do |eachLine|
+		
+			eachLine = eachLine.split(",rgb")
+		
+			titles.push(eachLine[0])
+		end
+	end
+	# titles = titles.join(",")
+	titles = beautifyTitles(titles)
+	session[:canvasTitles] = titles
 
 end
 
 
+# Takes the array of top 10 scores and adds "Seconds!" and new line character 
+# to each score for display purposes
+def beautifyTitles(data)
 
+	titleString = ''
+	data.each do |id| 
+		titleString += "<button onclick='getPastGames(#{id});'>#{id}</button>"
+ 	end
 
-	# 	data.each_line do |time|	
-	# 		time = time[/\d+\S\d/].to_f   # regular expressions. Rebular.com
-	# 		timesArray.push(time)
-	# 	end	
-	# end
+ 	return titleString
 
-	# timesArray = timesArray.sort
-	# timesArray = timesArray[0..9]
+end
 
-	# records = beautifyHighScores(timesArray)
-	# session["highScores"] = records
