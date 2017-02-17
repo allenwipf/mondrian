@@ -74,7 +74,7 @@ function saveImage(e){
 }
 
 
-function getPastGames(canvasID, e) {
+function getPastGames(canvasID) {
 
     var getRequest = new XMLHttpRequest();
     var params = "gameId=" + canvasID
@@ -86,7 +86,7 @@ function getPastGames(canvasID, e) {
         paintPastCanvas(ourData)
     };
     getRequest.send(params);
-    e.preventDefault();
+    // e.preventDefault();
 }
 
 function paintPastCanvas(ourData){
@@ -105,7 +105,7 @@ function paintPastCanvas(ourData){
         } else if ( color == '0, 0, 204'){
             document.getElementById("row_" + x + "_box_" + y + "").style.background = "#0000cc"
         } else {
-            document.getElementById("row_" + x + "_box_" + y + "").style.background = "white"
+            document.getElementById("row_" + x + "_box_" + y + "").style.background = "#ffffff"
         }  
 
         y++
@@ -126,9 +126,10 @@ function clearCanvas(){
     var x = 1
     var y = 1
 
+
     var howmany = document.getElementsByClassName("row").length
 
-    for (boxes = 0; boxes <= howmany; boxes++){
+    for (boxes = 1; boxes <= howmany; boxes++){
         document.getElementById("row_" + x + "_box_" + y + "").style.background = ""
 
         y++

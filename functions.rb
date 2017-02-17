@@ -2,6 +2,7 @@
 def save_game(game_colors)
 	info = File.open("/Users/Wipf/Code/projects/mondrian/views/data.erb", "a") # a to append
 	info.print "\n"
+	info.print "\n"
 	info.print "#{Time.now.to_i},"
 	info.print game_colors
 
@@ -15,9 +16,10 @@ def getPastCanvas(date)
 	File.open("/Users/Wipf/Code/projects/mondrian/views/data.erb", "r") do |data|
 
 		data.each_line do |eachLine|
-		
+		    eachLine.delete!("\n")
+
 			eachLine = eachLine.split(",rgb")
-			
+
 			if eachLine[0] == date
 				requestedLine = eachLine[1..17]
 				
@@ -33,12 +35,18 @@ def getCanvasTitles()
 	titles = []
 	File.open("/Users/Wipf/Code/projects/mondrian/views/data.erb", "r") do |data|
 
-		data.each_line do |eachLine|
 		
-			eachLine = eachLine.split(",rgb")
 		
-			titles.push(eachLine[0])
-		end
+			data.each_line do |eachLine|
+
+				if eachLine.length > 1
+			
+					eachLine = eachLine.split(",rgb")
+
+					titles.push(eachLine[0])
+				end
+			end
+		
 	end
 	# titles = titles.join(",")
 	titles = beautifyTitles(titles)
@@ -53,7 +61,11 @@ def beautifyTitles(data)
 
 	titleString = ''
 	data.each do |id| 
-		titleString += "<button onclick='getPastGames(#{id});'>#{id}</button>"
+
+		allen = Time.at(id.to_i)
+		allen = allen.strftime('%a, %b %d %Y %H:%M')
+	
+		titleString += "<button onclick='getPastGames(#{id});'>#{allen}</button>"
  	end
 
  	return titleString
