@@ -89,12 +89,20 @@ function getPastCanvas(canvasID) {
 function paintPastCanvas(ourData){
     var x = 1
     var y = 1
+    var a = 0
 
     ourData = ourData.slice(1, -1);
     ourData = ourData.split(/\W,{1}\W/)
+    // loops through alertFunc every 
+    var myLoop = setInterval(eachColor, 100);
 
-    ourData.forEach(function(color) {
+    function eachColor() {
 
+        if (a == 15){
+            clearInterval(myLoop)
+        }
+
+        var color = ourData[a]
         if (color == '204, 0, 0'){
             document.getElementById("row_" + x + "_box_" + y + "").style.background = "#cc0000"         
         } else if (color == '255, 236, 0'){
@@ -104,12 +112,14 @@ function paintPastCanvas(ourData){
         } else {
             document.getElementById("row_" + x + "_box_" + y + "").style.background = "#ffffff"
         }  
+
         y++
         if (y == 5){
             x++
             y = 1
         }
-    });
+        a ++
+    }
     document.getElementById('myModal').style.display = "none"
 }
 

@@ -66,4 +66,3 @@ def beautifyTitles(data)
  	end
  	return titleString
 end
-
